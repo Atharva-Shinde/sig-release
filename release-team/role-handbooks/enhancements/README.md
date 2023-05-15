@@ -142,7 +142,6 @@ It is important that this process be followed and documentation remain up-to-dat
 - Make a [pull request](https://github.com/kubernetes/sig-release/pull/1411) to add the shortlinked Enhancement Tracking Board to the current release page in [sig-release][sig-release].
 - Make a pull request to add the shortlinked Enhancement Tracking Board to [kubernetes/enhancements README page](https://github.com/kubernetes/enhancements#enhancements-tracking-board).
 - Find [Issues][enhancements-issues] from previous milestone that have graduated to Stable. Remove `tracked/yes` or `tracked/no` labels. Check to see if the KEP status has been updated to `implemented`. If it has, close the issue. If it has not, ask the issue contact to both update the KEP status field and close the Enhancement issue once the update PR has merged.
-- Find [Issues labeled `tracked/yes`](https://github.com/kubernetes/enhancements/issues?q=is%3Aopen+is%3Aissue+label%3Atracked%2Fyes) and change to `tracked/no` until the Enhancement is ready to be tracked for the upcoming release.
 - Find [Issues labeled `lead-opted-in`](https://github.com/kubernetes/enhancements/issues?q=+is%3Aissue+label%3Alead-opted-in+) and remove the `lead-opted-in` label from all issues. Enhancements must be explicitly opted into each release.
 - Close previous milestone by ensuring that there are no open issues/PRs in that milestone.
 - Gather Shadows to have them read this handbook and give expectations on what the process looks like and their particular role. If possible, try to schedule a call with the shadows to get them accustomed to the team. This helps as a great team building exercise.
@@ -157,6 +156,11 @@ It is important that this process be followed and documentation remain up-to-dat
   - [1.26 call for enhancements](https://groups.google.com/a/kubernetes.io/g/dev/c/lnxXgZmOOMo/m/r6QNJIewBwAJ?utm_medium=email)
 - Verify issues have k/k PRs associated so they can be referenced and easily tracked. This is going to be critical come Enhancement Freeze and Code Freeze to see the status of the code.
 - Work with the Release Lead to introduce yourself, talk about release information, and relay information about opting into the release with SIG Leads.
+
+**Note**: out-of-tree enhancments i.e enhancments with label `tracked/out-of-tree` applied to them don't have their PRs inside [kubernetes/kubernetes](https://github.com/kubernetes/kubernetes) repository unlike other enhancements, therefore during enhancements-freeze and code-freeze they might not strictly comply with the tracking criteria.
+  Examples: 
+  - https://github.com/kubernetes/enhancements/issues/3203#issuecomment-1421928726 
+  - https://github.com/kubernetes/enhancements/issues/3476#issuecomment-1467208685
 
 #### Before Enhancements Freeze
 
@@ -199,17 +203,14 @@ It is important that this process be followed and documentation remain up-to-dat
 
 #### Before Code Freeze
 
-All enhancements going into the release must have their code pull requests in a merge-ready state with approved and lgtm labels applied. This includes tests, and docs PRs opened by the due date. Due to the Prow queue, this may mean that approved PRs merge shortly after the deadline.
+- **All** enhancements going into the release must have their pull requests in a merge-ready state with approved and lgtm labels applied. This includes tests, and docs PRs opened by the due date. Due to the Prow queue, this may mean that approved PRs merge shortly after the deadline.
 
 #### Week of Code Freeze
 
 - Remove any enhancements that failed to merge their code by the Code freeze deadline.
   - Set their status in the sheet to `Removed from Milestone`.
-  - Remove the milestone and change `tracked/yes` label to `tracked/no` on the Enhancement Issue with the following comments
 
     ```text
-    /remove-label tracked/yes
-    /label tracked/no
     /milestone clear
     ```
 
